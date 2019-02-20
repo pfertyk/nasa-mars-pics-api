@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  web:
+    build: .
+    command: "python app.py"
+    ports:
+     - "8888:8888"
+    tty: true
+    volumes:
+     - .:/code

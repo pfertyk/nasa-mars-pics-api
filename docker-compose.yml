@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-     - "80:80"
+     - "8888:8888"
     tty: true
     volumes:
      - .:/code

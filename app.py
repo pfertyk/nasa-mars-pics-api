@@ -29,15 +29,30 @@ async def get_mars_image_url_from_nasa():
         return random.choice(photos)['img_src']
 
 
+async def get_random_cached_mars_photo_url():
+    photo_base_url = 'http://mars.jpl.nasa.gov/msl-raw-images/msss/'
+    photo_urls = [
+        '00582/mcam/0582MR0024340260400318E01_DXXX.jpg',
+        '01420/mcam/1420MR0070080000702418E01_DXXX.jpg',
+        '00587/mcam/0587ML0024530020300471E01_DXXX.jpg',
+    ]
+    return photo_base_url + random.choice(photo_urls)
+
+
 async def get_mars_photo_bytes():
-    while True:
-        image_url = await get_mars_image_url_from_nasa()
-        print(image_url)
-        async with ClientSession() as session:
-            async with session.get(image_url) as resp:
-                image_bytes = await resp.read()
-        if await validate_image(image_bytes):
-            break
+    image_url = await get_random_cached_mars_photo_url()
+    print(image_url)
+    async with ClientSession() as session:
+        async with session.get(image_url) as resp:
+            image_bytes = await resp.read()
+    # while True:
+        # image_url = await get_mars_image_url_from_nasa()
+        # print(image_url)
+        # async with ClientSession() as session:
+            # async with session.get(image_url) as resp:
+                # image_bytes = await resp.read()
+        # if await validate_image(image_bytes):
+            # break
     return image_bytes
 
 
@@ -51,4 +66,4 @@ app.router.add_get('/', get_mars_photo, name='mars_photo')
 
 
 if __name__ == '__main__':
-    web.run_app(app, host='0.0.0.0', port=8888)
+    web.run_app(app, host='0.0.0.0', port=80)

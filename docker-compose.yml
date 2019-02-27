@@ -1,6 +1,8 @@
 version: '3.3'
 services:
   web:
+    environment:
+     - PORT=8888
     build: .
     ports:
      - "8888:8888"

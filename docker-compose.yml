@@ -2,10 +2,24 @@ version: '3.3'
 services:
   web:
     environment:
-     - PORT=8888
+      PORT: 8888
+      NASA_API_KEY: $NASA_API_KEY
+      DATABASE_URL: $DATABASE_URL
     build: .
     ports:
      - "8888:8888"
     tty: true
+    depends_on:
+     - db
     volumes:
      - .:/code
+  db:
+    image: postgres:10
+    ports:
+     - "5432:5432"
+    expose:
+     - "5432"
+    environment:
+      POSTGRES_DB: nasa
+      POSTGRES_USER: nasa
+      POSTGRES_PASSWORD: nasa

@@ -29,12 +29,6 @@ docker-compose build
 docker-compose up
 ```
 
-Database structure has to be initiated manually:
-
-```
-docker exec -it nasa-mars-pics-api_web_1 python init_db.py
-```
-
 ## Usage
 
 To index the data access <http://localhost:8888/index>. This will run a loop that

@@ -31,11 +31,19 @@ docker-compose up
 
 ## Usage
 
-To index the data access <http://localhost:8888/index>. This will run a loop that
-accesses NASA API, saves the image links in the database, and checks the attributes
-of images (size and color mode) to decide if an image is worth displaying.
+To index the data run:
 
-To get a random image, access <http://localhost:8888>.
+```
+docker exec -it nasa-mars-pics-api_web_1 python index_photos.py
+```
+
+This will run a loop that accesses NASA API, saves the image links in the
+database, and checks the attributes of images (size and color mode) to decide
+if they are worth displaying.
+
+To get a random image, access <http://localhost:8888>. You will probably need to
+wait a moment before the first acceptable image becomes available, until then
+you will receive a 500 Internal Server Error.
 
 ## Deploying to Heroku
 

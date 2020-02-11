@@ -9,6 +9,7 @@ metadata = MetaData()
 MarsImage = Table(
     'mars_image', metadata,
     Column('url', String, primary_key=True),
+    Column('sol', Integer),
     Column('width', Integer),
     Column('height', Integer),
     Column('mode', String),
@@ -16,9 +17,12 @@ MarsImage = Table(
 )
 
 
+async def get_engine():
+    return await aiopg.sa.create_engine(dsn=DATABASE_URL)
+
+
 async def init_pg(app):
-    engine = await aiopg.sa.create_engine(dsn=DATABASE_URL)
-    app['db'] = engine
+    app['db'] = await get_engine()
 
 
 async def close_pg(app):
